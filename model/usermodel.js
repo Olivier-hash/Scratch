@@ -30,4 +30,4 @@ const Users = dbconn.define('users', {
     }
 })
 
-exports.module = Users
+module.exports = Users
