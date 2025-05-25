@@ -42,3 +42,27 @@ exports.CreateUSer = async (req, res) =>{
         
     }
 }
+
+
+exports.Login = async(req,res) =>{
+
+    const{email, password} = req.body
+
+    try {
+        const user = await userModel.findOne({where: {email}})
+        if (!user) {
+            res.json('user not found')
+        }
+
+        if(!user.isVerified){
+            
+            return res.json({message: 'please verify your email before logging in.'});
+        }
+        else{
+
+            const hashpass = await bcrypt.compare(password, user.password )
+        }
+    } catch (error) {
+        
+    }
+}
