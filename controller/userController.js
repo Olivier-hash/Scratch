@@ -44,6 +44,8 @@ exports.CreateUSer = async (req, res) =>{
 }
 
 
+
+
 exports.Login = async(req,res) =>{
 
     const{email, password} = req.body
@@ -66,10 +68,53 @@ exports.Login = async(req,res) =>{
                 res.json('invalid password')
             }
             else{
-                const secreteKey = process.env.
+                const secreteKey = process.env.secreteKey
+
+                const token = JsonWebTokenError.sign({fullName: user.fullName, email:user.email, isVerified:isVerified}, secreteKey,{expires: '3h'})
+                res.json({message:'login successful',
+                    user:{fullName: user.fullName, email:user.email, isVerified:isVerified}
+                })
             }
         }
     } catch (error) {
         
     }
 }
+
+
+
+// Tommorow session
+
+exports.VerifyEmail = async (req,res)=>{
+
+    const {id , token} =  req.params;
+
+    try {
+       
+        const user = await UserModel.findByPk(id) ;
+        if(!user){
+            res.json('user not found')
+        }
+
+        if(user.token !== token){
+            res.json('token does not exist')
+        }
+
+        user.isVerified = true ,
+        user.token = null
+
+        await user.save()
+
+        res.json('token verified successfully')
+        
+        
+
+
+    } catch (error) {
+        
+        console.log('error occured', error)
+    }
+
+}
+
+
