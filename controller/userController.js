@@ -61,6 +61,13 @@ exports.Login = async(req,res) =>{
         else{
 
             const hashpass = await bcrypt.compare(password, user.password )
+
+            if(!hashpass){
+                res.json('invalid password')
+            }
+            else{
+                const secreteKey = process.env.
+            }
         }
     } catch (error) {
         
