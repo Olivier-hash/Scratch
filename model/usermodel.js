@@ -4,7 +4,7 @@ const {DataTypes} = reuire('sequelize')
 
 const dbconn = require('../config/db')
 
-// commen
+// comm
 const Users = dbconn.define('users', {
     
     fullName:{
