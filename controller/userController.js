@@ -12,7 +12,7 @@ exports.CreateUSer = async (req, res) =>{
     const {fullName, email, password} = req.body
     try {
 
-        // check if user email already exist 
+        // check if user email already exist sd
         const ExistingUser = await userModel.findOne({where:{email}})
 
         const hashpass = await bcrypt.hash(password, 10);
