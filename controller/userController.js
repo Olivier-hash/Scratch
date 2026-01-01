@@ -83,7 +83,7 @@ exports.Login = async(req,res) =>{
 
 
 
-// Tommorow   session
+// Tommorow   sessio
 
 exports.VerifyEmail = async (req,res)=>{
 
